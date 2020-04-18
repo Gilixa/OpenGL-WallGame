@@ -21,10 +21,6 @@ public:
 	void SetUpMaterial();
 
 	void SetRotation(float rotation);
-	GLfloat _rotation;
-	Vector3 _position;
-
-
 
 };
 

@@ -40,4 +40,26 @@ namespace GLUTCallbacks
 		helloGL->Keyboard(key, x, y);
 	}
 
+
+	void KeyboardUp(unsigned char key, int x, int y)
+	{
+		helloGL->KeyboardUp(key, x, y);
+	}
+
+	void MouseWheel(int wheel, int direction, int x, int y)
+	{
+		helloGL->MouseWheel(wheel,direction, x, y);
+	}
+
+
+	void Mouse(int button, int state, int x, int y)
+	{
+		helloGL->Mouse(button, state, x, y);
+	}
+
+	void MouseMove(int x, int y)
+	{
+		helloGL->MouseMove(x, y);
+	}
+
 }

@@ -20,3 +20,8 @@ void SceneObject::Update()
 {
 
 }
+
+float SceneObject::GetWidth()
+{
+	return _width;
+}

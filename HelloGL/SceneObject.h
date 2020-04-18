@@ -13,6 +13,11 @@ class SceneObject
 protected:
 	Mesh* _mesh;
 	Texture2D* _texture;
+	float _width;
+
+
+
+
 
 public:
 	SceneObject(Mesh* mesh, Texture2D* texture);
@@ -20,7 +25,11 @@ public:
 
 	virtual void Update();
 	virtual void Draw();
+	virtual float GetWidth();
 
+	
 
+	GLfloat _rotation;
+	Vector3 _position;
 };
 

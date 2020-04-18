@@ -12,6 +12,8 @@ Cube::Cube(Mesh* mesh,Texture2D* texture, float x, float y, float z) : SceneObje
 	_rotation = 0.0f;
 	_texture = texture;
 
+	_width =(_mesh->Vertices[0].x - _mesh->Vertices[1].x) +(_mesh->Vertices[0].y - _mesh->Vertices[1].y) +(_mesh->Vertices[0].z - _mesh->Vertices[1].z);
+
 }
 
 Cube::~Cube()
@@ -21,7 +23,7 @@ Cube::~Cube()
 
 void Cube::Draw()
 {
-
+	glPushMatrix();
 	//glRotatef(_rotation, 1.0f, 0.0f, 0.0f);
 	glTranslatef(_position.x, _position.y, _position.z);
 	glEnable(GL_NORMAL_ARRAY);
@@ -34,7 +36,7 @@ void Cube::Draw()
 	glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 	glNormalPointer(GL_FLOAT, 0, _mesh->Normals);
 	SetUpMaterial();
-	glPushMatrix();
+
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, _mesh->Indices);
 
 	glPopMatrix();
@@ -45,11 +47,12 @@ void Cube::Draw()
 
 void Cube::Update()
 {
-	_rotation += 0.001f;
-	if (_rotation >= 360.0f)
-	{
-		_rotation = 0.0f;
-	}
+	//_rotation += 0.001f;
+	//if (_rotation >= 360.0f)
+	//{
+	//	_rotation = 0.0f;
+	//}
+
 }
 
 void Cube::SetRotation(float rotation)
