@@ -10,10 +10,11 @@
 #include "Player.h"
 #include "SceneObject.h"
 #include <vector>
+#include "Wall.h"
 
 #define REFRESHRATE 16
 //The number of keyboard buttons checked
-#define KEYBOARDCOUNT 4
+#define KEYBOARDCOUNT 6
 
 #define CAMERA_MODIFIER 0.005f
 #define PLAYER_SPEED 0.1f
@@ -48,8 +49,8 @@ public:
 
 
 	float CalculateDistanceSquared(SceneObject* s1, SceneObject* s2);
-
 	void GenerateWall();
+	int RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4);
 
 
 private:
@@ -62,6 +63,8 @@ private:
 	Lighting* _lightData;
 
 	Player* player;
+	Wall* wall;
+
 
 	bool keyboard[KEYBOARDCOUNT];
 	int distanceFromPlayer;

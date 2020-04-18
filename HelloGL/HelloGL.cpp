@@ -7,6 +7,7 @@
 #include <cstdlib>
 
 #define NUMBEROFCUBES 5
+#define PI 3.14159265
 
 using namespace std;
 HelloGL::HelloGL(int argc, char* argv[])
@@ -41,6 +42,10 @@ void HelloGL::InitObjects()
 	
 	//objects.push_back(new Cube(cubeMesh, texture, 0, 0, 0));
 
+	wall = new Wall(3);
+
+
+
 	player = new Player(playerMesh, texture2, 0, 0, 0);
 
 
@@ -52,7 +57,7 @@ void HelloGL::InitObjects()
 	}
 
 
-
+	GenerateWall();
 
 	distanceFromPlayer = 10;
 	rmbDown = false;
@@ -141,6 +146,8 @@ void HelloGL::Display()
 
 	player->Draw();
 
+	wall->Draw();
+
 
 	Vector3 v = { -1.4f,0.7f, -1.0f };
 	Color c = { 0.0f,1.0f,0.0f };
@@ -221,6 +228,10 @@ void HelloGL::Update()
 //2-D
 //3-W
 
+//4-Q
+//5-E
+
+
 void HelloGL::Keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
@@ -238,6 +249,12 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 	case('w'):
 		keyboard[3] = true;
 		break;
+	case('q'):
+		keyboard[4] = true;
+		break;
+	case('e'):
+		keyboard[5] = true;
+		break;
 	default:
 		break;
 	}
@@ -253,12 +270,17 @@ void HelloGL::KeyboardUp(unsigned char key, int x, int y)
 	case('s'):
 		keyboard[1] = false;
 		break;
-
 	case('d'):
 		keyboard[2] = false;
 		break;
 	case('w'):
 		keyboard[3] = false;
+		break;
+	case('q'):
+		keyboard[4] = false;
+		break;
+	case('e'):
+		keyboard[5] = false;
 		break;
 	default:
 		break;
@@ -271,23 +293,44 @@ void HelloGL::KeyboardUpdate()
 
 	if (keyboard[3])
 	{
-		player->_position.y += PLAYER_SPEED;
+
+
+		player->_position.y += PLAYER_SPEED * cos(player->_rotation * PI/180);
+		player->_position.x -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
 	}
 
 	if (keyboard[1])
 	{
-		player->_position.y -= PLAYER_SPEED;
+		player->_position.y -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		player->_position.x += PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
 	}
 
 	if (keyboard[0])
 	{
-		player->_position.z += PLAYER_SPEED;
+		player->_position.x += PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		player->_position.y += PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
 	}
 
 	if (keyboard[2])
 	{
-		player->_position.z -= PLAYER_SPEED;
+		player->_position.x -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		player->_position.y -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
+	
 	}
+
+	if (keyboard[4])
+	{
+		player->_rotation -= 1.0f;
+	}
+
+	if (keyboard[5])
+	{
+		player->_rotation += 1.0f;
+	}
+
 }
 
 void HelloGL::CameraUpdate()
@@ -369,3 +412,74 @@ void HelloGL::DrawString(const char* text, Vector3* position, Color* color)
 	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24,(unsigned char*)text);
 }
 
+
+
+//Wall could be its own object - making it easier to make more?
+
+void HelloGL::GenerateWall()
+{
+	int wallArray[9] = { 0 };
+
+	int numberGenerator = rand() % 9;
+	int secondNumber;
+
+	switch (numberGenerator)
+	{
+	case 0:
+		secondNumber = RollNumbers(2, 1, 3, NULL, NULL);
+		break;
+	case 1:
+		secondNumber = RollNumbers(3, 0, 2, 4, NULL);
+		break;
+	case 2:
+		secondNumber = RollNumbers(2, 1, 5, NULL, NULL);
+		break;
+	case 3:
+		secondNumber = RollNumbers(3, 0, 4, 6, NULL);
+		break;
+	case 4:
+		secondNumber = RollNumbers(4, 1, 3, 5, 7);
+		break;
+	case 5:
+		secondNumber = RollNumbers(3, 2, 4, 8, NULL);
+		break;
+	case 6:
+		secondNumber = RollNumbers(2, 3, 7, NULL, NULL);
+		break;
+	case 7:
+		secondNumber = RollNumbers(3, 4, 6, 8, NULL);
+		break;
+	case 8:
+		secondNumber = RollNumbers(2, 5, 7, NULL, NULL);
+		break;
+	}
+
+	wallArray[numberGenerator] = 1;
+	wallArray[secondNumber] = 1;
+
+}
+
+int HelloGL::RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4)
+{
+	int numberGenerator = rand() % numberOfNumbers + 1;
+
+	switch (numberGenerator)
+	{
+	case 1:
+		return num1;
+		break;
+	case 2:
+		return num2;
+		break;
+	case 3:
+		return num3;
+		break;
+	case 4:
+		return num4;
+		break;
+	default:
+		return num1;
+		cout << "Please enter the correct numberOfNumbers" << endl;
+		break;
+	}
+}
