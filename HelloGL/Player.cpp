@@ -51,7 +51,7 @@ void Player::Draw()
 
 void Player::Update()
 {
-
+	_position.z += PLAYER_SPEED;
 }
 
 void Player::SetRotation(float rotation)

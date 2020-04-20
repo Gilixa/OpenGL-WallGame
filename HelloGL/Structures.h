@@ -66,3 +66,9 @@ struct Material
 	Vector4 Ambient, Diffuse, Specular;
 	GLfloat Shininess;
 };
+
+struct returnInts
+{
+	int num1;
+	int num2;
+};

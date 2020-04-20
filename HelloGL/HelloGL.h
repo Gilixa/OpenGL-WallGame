@@ -17,7 +17,12 @@
 #define KEYBOARDCOUNT 6
 
 #define CAMERA_MODIFIER 0.005f
-#define PLAYER_SPEED 0.1f
+
+#define NUMBEROFCUBES 0
+#define NUMBEROFWALLSSPAWN 3
+#define WALLSPAWNTIME 1.5
+#define PI 3.14159265
+#define WALLSEPARATION 200
 
 
 class HelloGL
@@ -63,7 +68,8 @@ private:
 	Lighting* _lightData;
 
 	Player* player;
-	Wall* wall;
+
+	std::vector<Wall*> walls;
 
 
 	bool keyboard[KEYBOARDCOUNT];
@@ -81,6 +87,9 @@ private:
 	float x;
 
 	bool rmbDown;	
+
+	float wallSpawnTimer;
+	int zWallSpawn;
 
 };
 

@@ -5,7 +5,6 @@
 #include "GL/freeglut.h" //freeglut library
 #include "Cube.h"
 
-#define numberOfWallTiles 49
 
 class Wall
 {
@@ -15,13 +14,18 @@ public:
 
 	void Draw();
 	void GenerateWall();
+	void Update();
 
-
+	float _Zposition;
 
 private:
-	int RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4);
-	float _Zposition;
-	Cube* wallArray[numberOfWallTiles];
+	returnInts RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4);
+	returnInts RollNumbers(int num1);
+	returnInts GetPos(int num1);
+
+	Cube* wallArray[49];
+
+	int numberOfTiles;
 
 };
 

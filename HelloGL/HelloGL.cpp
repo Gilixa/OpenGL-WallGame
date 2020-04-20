@@ -6,8 +6,8 @@
 #include <ctime>
 #include <cstdlib>
 
-#define NUMBEROFCUBES 5
-#define PI 3.14159265
+
+
 
 using namespace std;
 HelloGL::HelloGL(int argc, char* argv[])
@@ -42,20 +42,15 @@ void HelloGL::InitObjects()
 	
 	//objects.push_back(new Cube(cubeMesh, texture, 0, 0, 0));
 
-	wall = new Wall(3);
-
 	player = new Player(playerMesh, texture2, 0, 0, 0);
 
-
+	walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
 
 
 	for (int i = 0; i < NUMBEROFCUBES; i++)
 	{
 		objects.push_back(new Cube(cubeMesh, texture, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 100.0f));
 	}
-
-
-	GenerateWall();
 
 	distanceFromPlayer = 10;
 	rmbDown = false;
@@ -144,12 +139,15 @@ void HelloGL::Display()
 
 	player->Draw();
 
-	wall->Draw();
+	for (int i = 0; i < walls.size(); i++)
+	{
+		walls[i]->Draw();
+	}
 
 
 	Vector3 v = { -1.4f,0.7f, -1.0f };
 	Color c = { 0.0f,1.0f,0.0f };
-	DrawString("test", &v, &c);
+	//DrawString("test", &v, &c);
 	
 	glFlush(); // flushes the scene drawn to the graphics card
 	glutSwapBuffers();
@@ -189,17 +187,34 @@ void HelloGL::Update()
 	//glLightfv(GL_LIGHT0, GL_SPECULAR, &(_lightData->Specular.x));
 	//glLightfv(GL_LIGHT0, GL_POSITION, &(_lightPosition->x));
 
-	
-	
-	
-	
-	
-	
+	//Generate a new wall
+
+	if (wallSpawnTimer > WALLSPAWNTIME)
+	{
+		walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
+		wallSpawnTimer = 0;
+	}
+	else
+	{
+		wallSpawnTimer += 0.01f;
+	}
+
+	for (int i = 0; i < walls.size(); i++)
+	{
+		walls[i]->Update();
+
+		if (walls[i]->_Zposition < player->_position.z - 20)
+			walls.erase(walls.begin() + i);
+
+	}
 
 
 
 
 	player->Update();
+
+
+
 
 	for (int i = 0; i < objects.size(); i++)
 	{
@@ -321,12 +336,12 @@ void HelloGL::KeyboardUpdate()
 
 	if (keyboard[4])
 	{
-		player->_rotation -= 1.0f;
+		player->_rotation -= PLAYER_SPEED * 5;
 	}
 
 	if (keyboard[5])
 	{
-		player->_rotation += 1.0f;
+		player->_rotation += PLAYER_SPEED * 5;
 	}
 
 }
@@ -346,7 +361,7 @@ void HelloGL::CameraUpdate()
 	camera->center.z = player->_position.z;
 }
 
-void HelloGL::MouseWheel(int wheel, int directdion, int x, int y)
+void HelloGL::MouseWheel(int wheel, int direction, int x, int y)
 {
 	switch (direction)
 	{
@@ -417,70 +432,70 @@ void HelloGL::DrawString(const char* text, Vector3* position, Color* color)
 
 //Wall could be its own object - making it easier to make more?
 
-void HelloGL::GenerateWall()
-{
-	int wallArray[9] = { 0 };
-
-	int numberGenerator = rand() % 9;
-	int secondNumber;
-
-	switch (numberGenerator)
-	{
-	case 0:
-		secondNumber = RollNumbers(2, 1, 3, NULL, NULL);
-		break;
-	case 1:
-		secondNumber = RollNumbers(3, 0, 2, 4, NULL);
-		break;
-	case 2:
-		secondNumber = RollNumbers(2, 1, 5, NULL, NULL);
-		break;
-	case 3:
-		secondNumber = RollNumbers(3, 0, 4, 6, NULL);
-		break;
-	case 4:
-		secondNumber = RollNumbers(4, 1, 3, 5, 7);
-		break;
-	case 5:
-		secondNumber = RollNumbers(3, 2, 4, 8, NULL);
-		break;
-	case 6:
-		secondNumber = RollNumbers(2, 3, 7, NULL, NULL);
-		break;
-	case 7:
-		secondNumber = RollNumbers(3, 4, 6, 8, NULL);
-		break;
-	case 8:
-		secondNumber = RollNumbers(2, 5, 7, NULL, NULL);
-		break;
-	}
-
-	wallArray[numberGenerator] = 1;
-	wallArray[secondNumber] = 1;
-
-}
-
-int HelloGL::RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4)
-{
-	int numberGenerator = rand() % numberOfNumbers + 1;
-
-	switch (numberGenerator)
-	{
-	case 1:
-		return num1;
-		break;
-	case 2:
-		return num2;
-		break;
-	case 3:
-		return num3;
-		break;
-	case 4:
-		return num4;
-		break;
-	default:
-		return num1;
-		cout << "Please enter the correct numberOfNumbers" << endl;
-		break;
-	}
-}
+//void HelloGL::GenerateWall()
+//{
+//	int wallArray[9] = { 0 };
+//
+//	int numberGenerator = rand() % 9;
+//	int secondNumber;
+//
+//	switch (numberGenerator)
+//	{
+//	case 0:
+//		secondNumber = RollNumbers(2, 1, 3, NULL, NULL);
+//		break;
+//	case 1:
+//		secondNumber = RollNumbers(3, 0, 2, 4, NULL);
+//		break;
+//	case 2:
+//		secondNumber = RollNumbers(2, 1, 5, NULL, NULL);
+//		break;
+//	case 3:
+//		secondNumber = RollNumbers(3, 0, 4, 6, NULL);
+//		break;
+//	case 4:
+//		secondNumber = RollNumbers(4, 1, 3, 5, 7);
+//		break;
+//	case 5:
+//		secondNumber = RollNumbers(3, 2, 4, 8, NULL);
+//		break;
+//	case 6:
+//		secondNumber = RollNumbers(2, 3, 7, NULL, NULL);
+//		break;
+//	case 7:
+//		secondNumber = RollNumbers(3, 4, 6, 8, NULL);
+//		break;
+//	case 8:
+//		secondNumber = RollNumbers(2, 5, 7, NULL, NULL);
+//		break;
+//	}
+//
+//	wallArray[numberGenerator] = 1;
+//	wallArray[secondNumber] = 1;
+//
+//}
+//
+//int HelloGL::RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4)
+//{
+//	int numberGenerator = rand() % numberOfNumbers + 1;
+//
+//	switch (numberGenerator)
+//	{
+//	case 1:
+//		return num1;
+//		break;
+//	case 2:
+//		return num2;
+//		break;
+//	case 3:
+//		return num3;
+//		break;
+//	case 4:
+//		return num4;
+//		break;
+//	default:
+//		return num1;
+//		cout << "Please enter the correct numberOfNumbers" << endl;
+//		break;
+//	}
+//}
