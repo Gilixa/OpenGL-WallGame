@@ -26,7 +26,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 void HelloGL::InitObjects()
 {
 	camera = new Camera();
-	camera->eye.x = 5.0f; camera->eye.y = 5.0f; camera->eye.z = -5.0f;
+	camera->eye.x = 0.0f; camera->eye.y = 2.0f; camera->eye.z = -20.0f;
 	//camera->eye.x = 0.0f; camera->eye.y = 0.0f; camera->eye.z = 1.0f;
 	camera->center.x = 0.0f; camera->center.y = 0.0f; camera->center.z = 0.0f;
 	camera->up.x = 0.0f; camera->up.y = 1.0f; camera->up.z = 0.0f;
@@ -43,8 +43,6 @@ void HelloGL::InitObjects()
 	//objects.push_back(new Cube(cubeMesh, texture, 0, 0, 0));
 
 	wall = new Wall(3);
-
-
 
 	player = new Player(playerMesh, texture2, 0, 0, 0);
 
@@ -335,17 +333,20 @@ void HelloGL::KeyboardUpdate()
 
 void HelloGL::CameraUpdate()
 {
-	//eye.x = Object.X + cos(someangle)*(distance from object)
-	camera->eye.x = player->_position.x + cos(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
-	camera->eye.z = player->_position.z + sin(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
+
+	////eye.x = Object.X + cos(someangle)*(distance from object)
+
+	camera->eye.x = player->_position.x + sin(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
 	camera->eye.y = player->_position.y + sin(angleY + deltaAngleY) * distanceFromPlayer;
+	camera->eye.z = player->_position.z - cos(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
+
 
 	camera->center.x = player->_position.x;
 	camera->center.y = player->_position.y;
 	camera->center.z = player->_position.z;
 }
 
-void HelloGL::MouseWheel(int wheel, int direction, int x, int y)
+void HelloGL::MouseWheel(int wheel, int directdion, int x, int y)
 {
 	switch (direction)
 	{
