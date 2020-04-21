@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneObject.h"
 
-#define PLAYER_SPEED 0.10f
+#define PLAYER_SPEED 0.50f
 
 class Player : public SceneObject
 {

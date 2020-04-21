@@ -56,6 +56,9 @@ void HelloGL::InitObjects()
 	rmbDown = false;
 	x = 0;
 
+	
+
+
 	//for (int i = 500; i < 1000; i++)
 	//{
 	//	objects[i] = new Pyramid(pyramidMesh, ((rand() % 400) / 10.0f) - 20.0f, ((rand() % 200) / 10.0f) - 10.0f, -(rand() % 1000) / 100.0f);
@@ -95,10 +98,6 @@ void HelloGL::InitGL(int argc, char* argv[])
 	//glEnable(GL_LIGHT0);
 	
 	glMatrixMode(GL_MODELVIEW);
-
-
-
-
 }
 
 void HelloGL::InitLighting()
@@ -121,7 +120,6 @@ void HelloGL::InitLighting()
 	_lightData->Specular.y = 0.2;
 	_lightData->Specular.z = 0.2;
 	_lightData->Specular.w = 1.0;
-
 
 }
 
@@ -158,17 +156,11 @@ HelloGL::~HelloGL(void)
 {
 	delete camera;
 	camera = NULL;
-	//for (int i = 0; i < 500; i++)
-	//{
-	//	delete objects[i];
-	//	objects[i] = NULL;
-	//}
 
 	delete player;
 	player = NULL;
 
-	delete objects[0];
-	objects[0] = NULL;
+	walls.clear();
 
 }
 
@@ -206,16 +198,21 @@ void HelloGL::Update()
 		if (walls[i]->_Zposition < player->_position.z - 20)
 			walls.erase(walls.begin() + i);
 
+
+	}
+	player->Update();
+
+
+	//Only need to check 1st wall in the vector as every old wall is deleted
+	if (walls[0]->WallCollision(player))
+	{
+		cout << "collision" << endl;
 	}
 
 
 
 
-	player->Update();
-
-
-
-
+	//Objects collision
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update();
@@ -306,42 +303,48 @@ void HelloGL::KeyboardUpdate()
 
 	if (keyboard[3])
 	{
+		//player->_position.y += PLAYER_SPEED * cos(player->_rotation * PI/180);
+		//player->_position.x -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
 
-
-		player->_position.y += PLAYER_SPEED * cos(player->_rotation * PI/180);
-		player->_position.x -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
+		player->_position.y += PLAYER_SPEED /2;
 
 	}
 
 	if (keyboard[1])
 	{
-		player->_position.y -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
-		player->_position.x += PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
+		player->_position.y -= PLAYER_SPEED /2;
+		//player->_position.y -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		//player->_position.x += PLAYER_SPEED * sin(player->_rotation * PI / 180);
 
 	}
 
 	if (keyboard[0])
 	{
-		player->_position.x += PLAYER_SPEED * cos(player->_rotation * PI / 180);
-		player->_position.y += PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
+		player->_position.x += PLAYER_SPEED/ 2;
+		//player->_position.x += PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		//player->_position.y += PLAYER_SPEED * sin(player->_rotation * PI / 180);
 
 	}
 
 	if (keyboard[2])
 	{
-		player->_position.x -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
-		player->_position.y -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
+
+		player->_position.x -= PLAYER_SPEED /2;
+		//player->_position.x -= PLAYER_SPEED * cos(player->_rotation * PI / 180);
+		//player->_position.y -= PLAYER_SPEED * sin(player->_rotation * PI / 180);
 	
 	}
 
 	if (keyboard[4])
 	{
-		player->_rotation -= PLAYER_SPEED * 5;
+		player->_rotation -= 3;
 	}
 
 	if (keyboard[5])
 	{
-		player->_rotation += PLAYER_SPEED * 5;
+		player->_rotation += 3;
 	}
 
 }
@@ -356,9 +359,12 @@ void HelloGL::CameraUpdate()
 	camera->eye.z = player->_position.z - cos(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
 
 
+	
 	camera->center.x = player->_position.x;
 	camera->center.y = player->_position.y;
 	camera->center.z = player->_position.z;
+
+
 }
 
 void HelloGL::MouseWheel(int wheel, int direction, int x, int y)

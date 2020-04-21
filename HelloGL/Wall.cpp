@@ -19,33 +19,11 @@ int wallLookupArray[7][7] =
 	{42,43,44,45,46,47,48}
 };
 
-
-
 Wall::Wall(float z)
 {
 	_Zposition = z;
 	numberOfTiles = 49;
-
 	GenerateWall();
-
-
-
-
-
-	//for (int i = -3; i < 4; i++)
-	//{
-	//	
-	//	for (int j = -3; j < 4; j++)
-	//	{
-
-
-	//		wallArray[k] = new Cube(cubeMesh, texture, i * 2, j * 2, _Zposition);
-
-	//		k++;
-	//	}
-	//	
-	//}
-
 
 }
 
@@ -76,10 +54,6 @@ void Wall::Update()
 void Wall::GenerateWall()
 {
 	int numberGenerator = rand() % 48 + 1;
-
-
-
-
 	int inputNumber1 = GetPos(numberGenerator).num1;
 	int inputNumber2 = GetPos(numberGenerator).num2;
 	int wallArrayTest[7][7] = { 0 };
@@ -202,7 +176,6 @@ returnInts Wall::RollNumbers(int numberOfNumbers, int num1, int num2, int num3, 
 	return numbers;
 }
 
-
 returnInts Wall::GetPos(int num1)
 {
 	returnInts numbers;
@@ -221,4 +194,32 @@ returnInts Wall::GetPos(int num1)
 		}
 	}
 
+}
+
+bool Wall::WallCollision(SceneObject* s1)
+{
+	//Objects collision
+	for (int i = 0; i < numberOfTiles; i++)
+	{
+		wallArray[i]->Update();
+
+
+		float distance = CalculateDistanceSquared(s1, wallArray[i]);
+		float widthDistance = s1->GetWidth() + wallArray[i]->GetWidth();
+
+		if (distance <= widthDistance)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+
+}
+
+float Wall::CalculateDistanceSquared(SceneObject* s1, SceneObject* s2)
+{
+	float distance = ((s1->_position.x - s2->_position.x) * (s1->_position.x - s2->_position.x)) + ((s1->_position.y - s2->_position.y) * (s1->_position.y - s2->_position.y)) + ((s1->_position.z - s2->_position.z) * (s1->_position.z - s2->_position.z));
+
+	return distance;
 }
