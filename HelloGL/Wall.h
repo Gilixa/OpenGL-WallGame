@@ -22,8 +22,6 @@ public:
 	bool WallCollision(SceneObject* s1);
 
 private:
-	returnInts RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4);
-	returnInts RollNumbers(int num1);
 	returnInts GetPos(int num1);
 
 	Cube* wallArray[49];

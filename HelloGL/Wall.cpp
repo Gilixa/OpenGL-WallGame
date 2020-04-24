@@ -121,61 +121,6 @@ void Wall::GenerateWall()
 
 }
 
-returnInts Wall::RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4)
-{
-	int numberGenerator = rand() % numberOfNumbers + 1;
-	int numberGenerator2;
-	do
-	{
-		numberGenerator2 = rand() % numberOfNumbers + 1;
-	} while (numberGenerator == numberGenerator2);
-
-	returnInts numbers;
-
-
-	switch (numberGenerator)
-	{
-	case 1:
-		numbers.num1 = num1;
-		break;
-	case 2:
-		numbers.num1 = num2;
-		break;
-	case 3:
-		numbers.num1 = num3;
-		break;
-	case 4:
-		numbers.num1 = num4;
-		break;
-	default:
-		numbers.num1 = num1;
-		cout << "Please enter the correct numberOfNumbers" << endl;
-		break;
-	}
-
-	switch (numberGenerator2)
-	{
-	case 1:
-		numbers.num2 = num1;
-		break;
-	case 2:
-		numbers.num2 = num2;
-		break;
-	case 3:
-		numbers.num2 = num3;
-		break;
-	case 4:
-		numbers.num2 = num4;
-		break;
-	default:
-		numbers.num2 = num1;
-		cout << "Please enter the correct numberOfNumbers" << endl;
-		break;
-	}
-
-	return numbers;
-}
-
 returnInts Wall::GetPos(int num1)
 {
 	returnInts numbers;

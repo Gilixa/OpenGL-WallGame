@@ -26,6 +26,9 @@ public:
 
 	void Keyboard(unsigned char key, int x, int y);
 
+	bool alive;
+	float currentSpeed;
+
 
 };
 

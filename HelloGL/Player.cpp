@@ -14,7 +14,8 @@ Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : Scen
 
 	_width = (_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) + (_mesh->Vertices[0].z - _mesh->Vertices[1].z);
 
-
+	alive = true;
+	currentSpeed = PLAYER_SPEED;
 
 }
 
@@ -51,7 +52,7 @@ void Player::Draw()
 
 void Player::Update()
 {
-	_position.z += PLAYER_SPEED;
+	_position.z += currentSpeed;
 }
 
 void Player::SetRotation(float rotation)

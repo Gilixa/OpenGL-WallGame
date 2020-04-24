@@ -14,7 +14,7 @@
 
 #define REFRESHRATE 16
 //The number of keyboard buttons checked
-#define KEYBOARDCOUNT 6
+#define KEYBOARDCOUNT 7
 
 #define CAMERA_MODIFIER 0.005f
 
@@ -51,18 +51,12 @@ public:
 	void KeyboardUpdate();
 	void CameraUpdate();
 	void DrawString(const char* text, Vector3* position, Color* color);
-
-
 	float CalculateDistanceSquared(SceneObject* s1, SceneObject* s2);
-	void GenerateWall();
-	int RollNumbers(int numberOfNumbers, int num1, int num2, int num3, int num4);
+
 
 
 private:
 	Camera* camera;
-	//SceneObject* objects[1000];
-	
-	std::vector<SceneObject*> objects;
 
 	Vector4* _lightPosition;
 	Lighting* _lightData;
@@ -90,6 +84,7 @@ private:
 
 	float wallSpawnTimer;
 	int zWallSpawn;
+	float score;
 
 };
 
