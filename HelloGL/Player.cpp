@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh, texture)
+Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh)
 {
 	_position.x = x;
 	_position.y = y;
@@ -19,6 +19,10 @@ Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : Scen
 
 }
 
+
+
+
+
 Player::~Player()
 {
 
@@ -30,8 +34,6 @@ void Player::Draw()
 
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation, 0.0f, 0.0f, 1);
-
-
 
 	glEnable(GL_NORMAL_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, _texture->GetID());

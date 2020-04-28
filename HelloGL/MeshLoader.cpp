@@ -150,6 +150,8 @@ namespace MeshLoader
 		LoadNormal(inFile, *mesh->Mesh);
 		LoadIndices(inFile, *mesh->Mesh);
 
+		
+
 
 		return mesh;
 	}

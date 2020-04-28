@@ -4,11 +4,14 @@
 #include <gl/GLU.h> // OpenGL Utilities
 #include "GL/freeglut.h" //freeglut library
 
+
 class Texture2D
 {
 private:
-	GLuint _ID; // Texture ID
+
 	int _width, _height;
+
+	GLuint _ID; // Texture ID
 public:
 	Texture2D();
 	~Texture2D();
@@ -18,5 +21,8 @@ public:
 	int GetWidth() const { return _width; }
 	int GetHeight() const { return _height; }
 
+
+
+	bool LoadTextureTGA(const char* textureFileName);
 
 };

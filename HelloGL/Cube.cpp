@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Cube::Cube(Mesh* mesh,Texture2D* texture, float x, float y, float z) : SceneObject(mesh,texture)
+Cube::Cube(Mesh* mesh,Texture2D* texture, float x, float y, float z) : SceneObject(mesh)
 {
 	_position.x = x;
 	_position.y = y;
@@ -12,7 +12,7 @@ Cube::Cube(Mesh* mesh,Texture2D* texture, float x, float y, float z) : SceneObje
 	_rotation = -90.0f;
 	_texture = texture;
 
-	_width =(_mesh->Vertices[0].x - _mesh->Vertices[1].x) +(_mesh->Vertices[0].y - _mesh->Vertices[1].y) +(_mesh->Vertices[0].z - _mesh->Vertices[1].z);
+	_width =(_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) +(_mesh->Vertices[0].z - _mesh->Vertices[1].z);
 
 }
 
@@ -23,8 +23,8 @@ Cube::~Cube()
 
 void Cube::Draw()
 {
-	glPushMatrix();
 
+	glPushMatrix();
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_NORMAL_ARRAY);
@@ -37,9 +37,7 @@ void Cube::Draw()
 	glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 	glNormalPointer(GL_FLOAT, 0, _mesh->Normals);
 	SetUpMaterial();
-
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, _mesh->Indices);
-
 	glPopMatrix();
 	//glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);

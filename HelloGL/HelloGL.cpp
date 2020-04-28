@@ -7,10 +7,8 @@
 #include <cstdlib>
 #include <sstream>
 
-
-
-
 using namespace std;
+
 HelloGL::HelloGL(int argc, char* argv[])
 {
 	srand(time(NULL));
@@ -42,7 +40,13 @@ void HelloGL::InitObjects()
 	texture2->Load((char*)"stars.raw", 512, 512);
 
 
-	player = new Player(playerMesh, texture2, 0, 0, 0);
+	Texture2D* texture3 = new Texture2D();
+	texture3->LoadTextureTGA("test.tga");
+	
+
+	player = new Player(playerMesh, texture3, 0, 0, 0);
+
+
 
 	walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
 
@@ -129,7 +133,7 @@ void HelloGL::Display()
 	{
 		Vector3 v = { player->_position.x + 1.0f,player->_position.y + 3.0f, player->_position.z + 5.0f };
 		Color c = { 0.0f,1.0f,0.0f };
-		DrawString("You died", &v, &c);
+		DrawString("You died \n Press R to restart", &v, &c);
 
 	}
 	
@@ -215,6 +219,7 @@ void HelloGL::Update()
 				cout << "collision" << endl;
 				player->alive = false;
 				player->_position = { 0,0,0 };
+				player->currentSpeed = PLAYER_SPEED;
 				angleX = 0;
 				angleY = 0;
 				distanceFromPlayer = 10;

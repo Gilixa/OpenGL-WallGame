@@ -12,6 +12,9 @@
 #include <vector>
 #include "Wall.h"
 
+
+
+
 #define REFRESHRATE 16
 //The number of keyboard buttons checked
 #define KEYBOARDCOUNT 7
@@ -85,6 +88,7 @@ private:
 	float wallSpawnTimer;
 	int zWallSpawn;
 	float score;
+
 
 };
 

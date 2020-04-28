@@ -20,7 +20,7 @@ protected:
 
 
 public:
-	SceneObject(Mesh* mesh, Texture2D* texture);
+	SceneObject(Mesh* mesh);
 	virtual ~SceneObject();
 
 	virtual void Update();
