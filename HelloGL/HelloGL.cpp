@@ -31,6 +31,9 @@ void HelloGL::InitObjects()
 	camera->up.x = 0.0f; camera->up.y = 1.0f; camera->up.z = 0.0f;
 
 
+	Mesh* testMesh = MeshLoader::Load((char*)"Objects/CubeObj.txt");
+
+
 	Mesh* cubeMesh = MeshLoader::Load((char*)"Cube.txt");
 //	Mesh* pyramidMesh = MeshLoader::Load((char*)"pyramid.txt");
 	Mesh* playerMesh = MeshLoader::Load((char*)"Cube.txt");
@@ -42,9 +45,11 @@ void HelloGL::InitObjects()
 
 	Texture2D* texture3 = new Texture2D();
 	texture3->LoadTextureTGA("test.tga");
+
+
 	
 
-	player = new Player(playerMesh, texture3, 0, 0, 0);
+	player = new Player(testMesh, texture3, 0, 0, 0);
 
 
 

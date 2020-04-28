@@ -17,6 +17,10 @@ Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : Scen
 	alive = true;
 	currentSpeed = PLAYER_SPEED;
 
+
+	
+
+
 }
 
 
@@ -45,7 +49,7 @@ void Player::Draw()
 	glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 	glNormalPointer(GL_FLOAT, 0, _mesh->Normals);
 	SetUpMaterial();
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, _mesh->Indices);
+	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, _mesh->Indices);
 	glPopMatrix();
 	//glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
@@ -54,7 +58,7 @@ void Player::Draw()
 
 void Player::Update()
 {
-	_position.z += currentSpeed;
+	//_position.z += currentSpeed;
 }
 
 void Player::SetRotation(float rotation)
@@ -73,7 +77,7 @@ void Player::SetUpMaterial()
 	glMaterialfv(GL_FRONT, GL_AMBIENT, &(_material->Ambient.x));
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, &(_material->Diffuse.x));
 	glMaterialfv(GL_FRONT, GL_SPECULAR, &(_material->Specular.x));
-	glMaterialf(GL_FRONT, GL_SHININESS, _material->Shininess);
+	glMaterialf(GL_FRONT, GL_SHININESS, _material->Shininess);		
 }
 
 Vector3 Player::GetPosition()
