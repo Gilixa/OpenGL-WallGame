@@ -12,7 +12,8 @@ Cube::Cube(Mesh* mesh,Texture2D* texture, float x, float y, float z) : SceneObje
 	_rotation = -90.0f;
 	_texture = texture;
 
-	_width =(_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) +(_mesh->Vertices[0].z - _mesh->Vertices[1].z);
+	_width = (_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) + (_mesh->Vertices[0].z - _mesh->Vertices[1].z);
+	cout << _width << endl;
 
 }
 

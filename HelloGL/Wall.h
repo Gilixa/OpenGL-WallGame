@@ -30,7 +30,7 @@ private:
 
 	int numberOfTiles;
 
-	float CalculateDistanceSquared(SceneObject* s1, SceneObject* s2);
+	float CalculateDistanceSquared(Player* s1, SceneObject* s2);
 
 
 };

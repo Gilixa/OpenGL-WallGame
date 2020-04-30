@@ -1,17 +1,5 @@
-﻿  HelloGL.cpp
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(88,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(89,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(90,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(92,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(93,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(94,29): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(96,30): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(97,30): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(98,30): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(113,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(127,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(182,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(189,33): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(190,27): warning C4305: '-=': truncation from 'double' to 'float'
+﻿  Wall.cpp
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(108,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(108,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(145): warning C4715: 'Wall::GetPos': not all control paths return a value
   HelloGL.vcxproj -> C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\Debug\HelloGL.exe

@@ -40,22 +40,13 @@ Wall::~Wall()
 
 void Wall::Draw()
 {
-
-
 	glPushMatrix();
 	glTranslatef(0, 0, _Zposition);
-
-
 	for (int i = 0; i < numberOfTiles; i++)
 	{
 		wallArray[i]->Draw();
 	}
-
 	glPopMatrix();
-
-
-
-
 }
 
 void Wall::Update()
@@ -155,28 +146,25 @@ returnInts Wall::GetPos(int num1)
 
 bool Wall::WallCollision(Player* s1)
 {
-	float temp = s1->player->_position.z;
-	s1->player->_position.z = s1->_position.z;
 
 	//Objects collision
 	for (int i = 0; i < numberOfTiles; i++)
 	{
 		wallArray[i]->Update();
-		float distance = CalculateDistanceSquared(s1->player, wallArray[i]);
+
+		float distance = CalculateDistanceSquared(s1, wallArray[i]);
 		float widthDistance = s1->player->GetWidth() + wallArray[i]->GetWidth();
 		if (distance <= widthDistance)
 		{
 			return true;
 		}
 	}
-
-	s1->player->_position.z = temp;
 	
 	return false;
 
 }
 
-float Wall::CalculateDistanceSquared(SceneObject* s1, SceneObject* s2)
+float Wall::CalculateDistanceSquared(Player* s1, SceneObject* s2)
 {
 	float distance = ((s1->_position.x - s2->_position.x) * (s1->_position.x - s2->_position.x)) + ((s1->_position.y - s2->_position.y) * (s1->_position.y - s2->_position.y)) + ((s1->_position.z - _Zposition) * (s1->_position.z - _Zposition));
 
