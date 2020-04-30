@@ -17,16 +17,12 @@ Player::Player(float x, float y, float z)
 	currentSpeed = PLAYER_SPEED;
 	
 	_texture = new Texture2D();
-	_texture->LoadTextureTGA("test.tga");
+	_texture->LoadTextureTGA("Objects/Textures/stars.tga");
 
-	_mesh = MeshLoader::Load((char*)"Objects/Rectangle.txt");
+	_mesh = MeshLoader::Load((char*)"Objects/Cube.txt");
 	
-	for (int i = 0; i < 2; i++)
-	{
-		playerArray[i] = new Rect(_mesh, _texture, i * 0.5, i, 0);
-	}
+	player = new Cube(_mesh, _texture, 0, 0, 0);
 
-	playerArray[0]->SetRotation(90);
 }
 
 
@@ -43,10 +39,7 @@ void Player::Draw()
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation, 0.0f, 0.0f, 1);
 
-	for (int i = 0; i < 2; i++)
-	{
-		playerArray[i]->Draw();
-	}
+	player->Draw();
 
 	glPopMatrix();
 
@@ -54,11 +47,6 @@ void Player::Draw()
 
 void Player::Update()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		playerArray[i]->_position.z += currentSpeed;
-	}
-
 	_position.z += currentSpeed;
 }
 

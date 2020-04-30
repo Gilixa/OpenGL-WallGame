@@ -89,6 +89,6 @@ private:
 	float score;
 	float wallSpawnTime;
 
-
+	bool _paused;
 };
 

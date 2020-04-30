@@ -39,12 +39,23 @@ Wall::~Wall()
 }
 
 void Wall::Draw()
-
 {
+
+
+	glPushMatrix();
+	glTranslatef(0, 0, _Zposition);
+
+
 	for (int i = 0; i < numberOfTiles; i++)
 	{
 		wallArray[i]->Draw();
 	}
+
+	glPopMatrix();
+
+
+
+
 }
 
 void Wall::Update()
@@ -89,9 +100,9 @@ void Wall::GenerateWall()
 		wallArrayTest[inputNumber2 - 1][inputNumber1] = 1;
 	}
 
-	Mesh* cubeMesh = MeshLoader::Load((char*)"Cube.txt");
+	Mesh* cubeMesh = MeshLoader::Load((char*)"Objects/Cube.txt");
 	Texture2D* texture = new Texture2D();
-	texture->Load((char*)"penguins.raw", 512, 512);
+	texture->LoadTextureTGA("Objects/Textures/bricks.tga");
 	int k = 0;
 	int x = -3;
 	int y = -3;
@@ -103,7 +114,7 @@ void Wall::GenerateWall()
 		{
 			if (wallArrayTest[i][j] == 0)
 			{
-				wallArray[k] = new Cube(cubeMesh, texture, x * 2, y * 2, _Zposition);
+				wallArray[k] = new Cube(cubeMesh, texture, x * 2, y * 2, 0);
 
 				k++;
 
@@ -144,29 +155,30 @@ returnInts Wall::GetPos(int num1)
 
 bool Wall::WallCollision(Player* s1)
 {
+	float temp = s1->player->_position.z;
+	s1->player->_position.z = s1->_position.z;
+
 	//Objects collision
 	for (int i = 0; i < numberOfTiles; i++)
 	{
 		wallArray[i]->Update();
-		for (int j = 0; j < 2; j++)
+		float distance = CalculateDistanceSquared(s1->player, wallArray[i]);
+		float widthDistance = s1->player->GetWidth() + wallArray[i]->GetWidth();
+		if (distance <= widthDistance)
 		{
-			float distance = CalculateDistanceSquared(s1, wallArray[i]);
-			float widthDistance = s1->_width + wallArray[i]->GetWidth();
-
-			if (distance <= widthDistance)
-			{
-				return true;
-			}
+			return true;
 		}
 	}
+
+	s1->player->_position.z = temp;
 	
 	return false;
 
 }
 
-float Wall::CalculateDistanceSquared(Player* s1, SceneObject* s2)
+float Wall::CalculateDistanceSquared(SceneObject* s1, SceneObject* s2)
 {
-	float distance = ((s1->_position.x - s2->_position.x) * (s1->_position.x - s2->_position.x)) + ((s1->_position.y - s2->_position.y) * (s1->_position.y - s2->_position.y)) + ((s1->_position.z - s2->_position.z) * (s1->_position.z - s2->_position.z));
+	float distance = ((s1->_position.x - s2->_position.x) * (s1->_position.x - s2->_position.x)) + ((s1->_position.y - s2->_position.y) * (s1->_position.y - s2->_position.y)) + ((s1->_position.z - _Zposition) * (s1->_position.z - _Zposition));
 
 	return distance;
 }

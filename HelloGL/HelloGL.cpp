@@ -16,7 +16,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 	
 	InitGL(argc, argv);
 	InitObjects();
-//	InitLighting();
+	//InitLighting();
 	glutMainLoop();
 
 
@@ -30,29 +30,16 @@ void HelloGL::InitObjects()
 	camera->center.x = 0.0f; camera->center.y = 0.0f; camera->center.z = 0.0f;
 	camera->up.x = 0.0f; camera->up.y = 1.0f; camera->up.z = 0.0f;
 
-
-	Mesh* cubeMesh = MeshLoader::Load((char*)"Cube.txt");
 //	Mesh* pyramidMesh = MeshLoader::Load((char*)"pyramid.txt");
 
-	Texture2D* texture = new Texture2D();
-
-	Texture2D* texture2 = new Texture2D();
-	texture->Load((char*)"penguins.raw", 512, 512);
-	texture2->Load((char*)"stars.raw", 512, 512);
-
-
-
-
-	
 
 	player = new Player(0, 0, 0);
-
 	walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
-
 	wallSpawnTime = WALLSPAWNTIME;
 	distanceFromPlayer = 10;
 	rmbDown = false;
 	x = 0;
+	_paused = false;;
 	
 }
 
@@ -148,7 +135,7 @@ void HelloGL::Display()
 
 	DrawString(text, &v, &c);
 
-	glFlush(); // flushes the scene drawn to the graphics card
+	glFlush();
 	glutSwapBuffers();
 }
 
@@ -173,10 +160,8 @@ void HelloGL::Update()
 	gluLookAt(camera->eye.x, camera->eye.y, camera->eye.z, camera->center.x, camera->center.y, camera->center.z, camera->up.x, camera->up.y, camera->up.z);
 	glutPostRedisplay();
 
-	if (player->alive)
+	if (player->alive && !_paused)
 	{
-
-
 		//glLightfv(GL_LIGHT0, GL_AMBIENT, &(_lightData->Ambient.x));
 		//glLightfv(GL_LIGHT0, GL_DIFFUSE, &(_lightData->Diffuse.x));
 		//glLightfv(GL_LIGHT0, GL_SPECULAR, &(_lightData->Specular.x));
@@ -207,9 +192,6 @@ void HelloGL::Update()
 			}
 
 		}
-
-
-
 		player->Update();
 
 		if (walls.size() > 0)
@@ -229,13 +211,6 @@ void HelloGL::Update()
 			}
 		}
 	}
-	else
-	{
-
-	}
-
-
-
 }
 
 //-----------------------------------------------------
@@ -247,6 +222,8 @@ void HelloGL::Update()
 //3-W
 //4-Q
 //5-E
+//6-R
+//7-P
 
 void HelloGL::Keyboard(unsigned char key, int x, int y)
 {
@@ -258,7 +235,6 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 	case('s'):
 		keyboard[1] = true;
 		break;
-
 	case('d'):
 		keyboard[2] = true;
 		break;
@@ -273,8 +249,15 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 		break;
 	case('r'):
 		keyboard[6] = true;
+		break;
+	case('p'):
+		if (_paused)
+			_paused = false;
+		else
+			_paused = true;
 	default:
 		break;
+
 	}
 }
 
@@ -302,6 +285,7 @@ void HelloGL::KeyboardUp(unsigned char key, int x, int y)
 		break;
 	case('r'):
 		keyboard[6] = false;
+		break;
 	default:
 		break;
 	}
@@ -309,9 +293,6 @@ void HelloGL::KeyboardUp(unsigned char key, int x, int y)
 
 void HelloGL::KeyboardUpdate()
 {
-
-
-
 	if (keyboard[3])
 	{
 		//player->_position.y += PLAYER_SPEED * cos(player->_rotation * PI/180);
@@ -377,7 +358,6 @@ void HelloGL::KeyboardUpdate()
 		walls.clear();
 		walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
 	}
-
 }
 
 void HelloGL::CameraUpdate()

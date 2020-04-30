@@ -25,7 +25,7 @@ void Cube::Draw()
 {
 
 	glPushMatrix();
-	glTranslatef(_position.x, _position.y, _position.z);
+	glTranslatef(_position.x, _position.y, 0);
 	glRotatef(_rotation, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_NORMAL_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, _texture->GetID());

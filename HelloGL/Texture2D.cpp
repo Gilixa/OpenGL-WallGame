@@ -86,8 +86,6 @@ bool Texture2D::LoadTextureTGA(const char* textureFileName)
 	//We only support RGB type
 	if (type == 2)
 	{
-		cout << textureFileName << " loaded." << endl;
-
 		glGenTextures(1, &_ID); //Get next Texture ID
 		glBindTexture(GL_TEXTURE_2D, _ID); //Bind the texture to the ID
 

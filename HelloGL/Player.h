@@ -32,7 +32,7 @@ public:
 	Vector3 _position;
 	float _width;
 
-	Rect* playerArray[2];
+	Cube* player;
 
 
 };
