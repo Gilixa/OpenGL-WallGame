@@ -24,7 +24,6 @@
 #define NUMBEROFCUBES 0
 #define NUMBEROFWALLSSPAWN 3
 #define WALLSPAWNTIME 1.5
-#define PI 3.14159265
 #define WALLSEPARATION 200
 
 
@@ -88,6 +87,7 @@ private:
 	float wallSpawnTimer;
 	int zWallSpawn;
 	float score;
+	float wallSpawnTime;
 
 
 };

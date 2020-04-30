@@ -31,30 +31,25 @@ void HelloGL::InitObjects()
 	camera->up.x = 0.0f; camera->up.y = 1.0f; camera->up.z = 0.0f;
 
 
-	Mesh* testMesh = MeshLoader::Load((char*)"Objects/CubeObj.txt");
-
-
 	Mesh* cubeMesh = MeshLoader::Load((char*)"Cube.txt");
 //	Mesh* pyramidMesh = MeshLoader::Load((char*)"pyramid.txt");
-	Mesh* playerMesh = MeshLoader::Load((char*)"Cube.txt");
+
 	Texture2D* texture = new Texture2D();
+
 	Texture2D* texture2 = new Texture2D();
 	texture->Load((char*)"penguins.raw", 512, 512);
 	texture2->Load((char*)"stars.raw", 512, 512);
 
 
-	Texture2D* texture3 = new Texture2D();
-	texture3->LoadTextureTGA("test.tga");
 
 
 	
 
-	player = new Player(testMesh, texture3, 0, 0, 0);
-
-
+	player = new Player(0, 0, 0);
 
 	walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
 
+	wallSpawnTime = WALLSPAWNTIME;
 	distanceFromPlayer = 10;
 	rmbDown = false;
 	x = 0;
@@ -189,7 +184,7 @@ void HelloGL::Update()
 
 		//Generate a new wall
 
-		if (wallSpawnTimer > WALLSPAWNTIME)
+		if (wallSpawnTimer > wallSpawnTime)
 		{
 			walls.push_back(new Wall(player->_position.z + WALLSEPARATION));
 			wallSpawnTimer = 0;
@@ -207,6 +202,7 @@ void HelloGL::Update()
 			{
 				score += 1;
 				player->currentSpeed += 0.05;
+				wallSpawnTime -= 0.002;
 				walls.erase(walls.begin() + i);
 			}
 
@@ -221,7 +217,6 @@ void HelloGL::Update()
 			//Only need to check 1st wall in the vector as every old wall is deleted
 			if (walls[0]->WallCollision(player))
 			{
-				cout << "collision" << endl;
 				player->alive = false;
 				player->_position = { 0,0,0 };
 				player->currentSpeed = PLAYER_SPEED;
@@ -369,10 +364,13 @@ void HelloGL::KeyboardUpdate()
 	{
 		player->alive = true;
 		player->_position = { 0,0,0 };
+		player->_rotation = 0;
 		angleX = 0;
 		angleY = 0;
 		score = 0;
 		distanceFromPlayer = 10;
+		wallSpawnTime = WALLSPAWNTIME;
+		wallSpawnTimer = 0;
 		camera->eye.x = player->_position.x + sin(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
 		camera->eye.y = player->_position.y + sin(angleY + deltaAngleY) * distanceFromPlayer;
 		camera->eye.z = player->_position.z - cos(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
@@ -386,13 +384,10 @@ void HelloGL::CameraUpdate()
 {
 
 	////eye.x = Object.X + cos(someangle)*(distance from object)
-
 	camera->eye.x = player->_position.x + sin(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
 	camera->eye.y = player->_position.y + sin(angleY + deltaAngleY) * distanceFromPlayer;
 	camera->eye.z = player->_position.z - cos(angleX + deltaAngleX) * cos(angleY + deltaAngleY) * distanceFromPlayer;
 
-
-	
 	camera->center.x = player->_position.x;
 	camera->center.y = player->_position.y;
 	camera->center.z = player->_position.z;

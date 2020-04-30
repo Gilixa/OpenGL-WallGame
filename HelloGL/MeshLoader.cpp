@@ -19,9 +19,7 @@ namespace MeshLoader
 	void LoadVertices(ifstream& inFile, Mesh& mesh)
 	{
 		inFile >> mesh.VertexCount;
-
-		cout << mesh.VertexCount << endl;
-
+		
 		if (mesh.VertexCount > 0)
 		{
 			mesh.Vertices = new Vertex[mesh.VertexCount];
@@ -32,7 +30,6 @@ namespace MeshLoader
 				inFile >> mesh.Vertices[i].y;
 				inFile >> mesh.Vertices[i].z;
 
-				cout << mesh.Vertices[i].x << " " << mesh.Vertices[i].y << " " << mesh.Vertices[i].z << endl;
 
 
 			}
@@ -62,10 +59,7 @@ namespace MeshLoader
 	{
 		inFile >> mesh.TexCoordCount;
 
-
-		cout << mesh.TexCoordCount << endl;
-
-
+			   		 
 		if (mesh.TexCoordCount > 0)
 		{
 			mesh.TexCoords = new TexCoord[mesh.TexCoordCount];
@@ -75,7 +69,6 @@ namespace MeshLoader
 				inFile >> mesh.TexCoords[i].u;
 				inFile >> mesh.TexCoords[i].v;
 	
-				cout << mesh.TexCoords[i].u << " " << mesh.TexCoords[i].v << endl;
 			}
 		}
 
@@ -84,7 +77,6 @@ namespace MeshLoader
 	void LoadIndices(ifstream& inFile, Mesh& mesh)
 	{
 		inFile >> mesh.IndexCount;
-		cout << mesh.IndexCount << endl;
 
 		if (mesh.IndexCount > 0)
 		{
@@ -96,7 +88,6 @@ namespace MeshLoader
 				inFile >> mesh.Indices[(i * 3) + 1];
 				inFile >> mesh.Indices[(i * 3) + 2];
 
-				cout << mesh.Indices[i * 3] << " " << mesh.Indices[(i * 3) + 1] << " " << mesh.Indices[(i * 3) + 2] << endl;
 
 			}
 		}
@@ -106,7 +97,6 @@ namespace MeshLoader
 	{
 		
 		inFile >> mesh.NormalCount;
-		cout << mesh.NormalCount << endl;
 
 		if (mesh.NormalCount > 0)
 		{
@@ -120,7 +110,6 @@ namespace MeshLoader
 				inFile >> mesh.Normals[i].z;
 
 
-				cout << mesh.Normals[i].x << " " << mesh.Normals[i].y << " " << mesh.Normals[i].z << endl;
 
 			}
 		}
@@ -139,8 +128,6 @@ namespace MeshLoader
 			cerr << "Can't open texture file " << path << endl;
 			return nullptr;
 		}
-
-		cout << path << endl;
 
 		LoadVertices(inFile, *mesh);
 		//LoadColours(inFile, *mesh);
@@ -179,10 +166,4 @@ namespace MeshLoader
 	}
 
 
-	Mesh* MeshLoader::LoadUnTextured(char* path)
-	{
-		Mesh* mesh = new Mesh();
-
-		return mesh;
-	}
 }

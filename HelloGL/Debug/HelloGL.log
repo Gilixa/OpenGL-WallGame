@@ -1,8 +1,24 @@
-﻿  Player.cpp
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(72,28): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(72,57): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(72,86): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(73,28): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(73,57): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Player.cpp(73,86): warning C4305: '=': truncation from 'double' to 'float'
+﻿  GLUTCallBacks.cpp
+  HelloGL.cpp
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(101,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(102,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(103,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(105,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(106,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(107,29): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(109,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(110,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(111,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(126,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(140,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(197,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(204,33): warning C4305: '+=': truncation from 'double' to 'float'
+  main.cpp
+  Wall.cpp
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\HelloGL.cpp(205,27): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(106,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(106,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\HelloGL\Wall.cpp(143): warning C4715: 'Wall::GetPos': not all control paths return a value
   HelloGL.vcxproj -> C:\Users\Daniel\OneDrive - Staffordshire University\Semester 2\FOGGS\Project\Debug\HelloGL.exe

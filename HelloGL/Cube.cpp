@@ -56,7 +56,7 @@ void Cube::Update()
 
 void Cube::SetRotation(float rotation)
 {
-
+	_rotation = rotation;
 }
 
 void Cube::SetUpMaterial()

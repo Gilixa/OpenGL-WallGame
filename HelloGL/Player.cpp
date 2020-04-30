@@ -1,30 +1,33 @@
 #include "Player.h"
 #include <iostream>
+#include "MeshLoader.h"
+#include "Rectangle.h"
 
 using namespace std;
 
 
-Player::Player(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh)
+Player::Player(float x, float y, float z)
 {
 	_position.x = x;
 	_position.y = y;
 	_position.z = z;
 	_rotation = 0.0f;
-	_texture = texture;
-
-	_width = (_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) + (_mesh->Vertices[0].z - _mesh->Vertices[1].z);
 
 	alive = true;
 	currentSpeed = PLAYER_SPEED;
-
-
 	
+	_texture = new Texture2D();
+	_texture->LoadTextureTGA("test.tga");
 
+	_mesh = MeshLoader::Load((char*)"Objects/Rectangle.txt");
+	
+	for (int i = 0; i < 2; i++)
+	{
+		playerArray[i] = new Rect(_mesh, _texture, i * 0.5, i, 0);
+	}
 
+	playerArray[0]->SetRotation(90);
 }
-
-
-
 
 
 Player::~Player()
@@ -34,31 +37,29 @@ Player::~Player()
 
 void Player::Draw()
 {
-	glPushMatrix();
 
+
+	glPushMatrix();
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation, 0.0f, 0.0f, 1);
 
-	glEnable(GL_NORMAL_ARRAY);
-	glBindTexture(GL_TEXTURE_2D, _texture->GetID());
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	//glEnableClientState(GL_COLOR_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices);
-	//glColorPointer(3, GL_FLOAT, 0, _mesh->Colors);
-	glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
-	glNormalPointer(GL_FLOAT, 0, _mesh->Normals);
-	SetUpMaterial();
-	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, _mesh->Indices);
+	for (int i = 0; i < 2; i++)
+	{
+		playerArray[i]->Draw();
+	}
+
 	glPopMatrix();
-	//glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
 }
 
 void Player::Update()
 {
-	//_position.z += currentSpeed;
+	for (int i = 0; i < 2; i++)
+	{
+		playerArray[i]->_position.z += currentSpeed;
+	}
+
+	_position.z += currentSpeed;
 }
 
 void Player::SetRotation(float rotation)
@@ -88,51 +89,4 @@ Vector3 Player::GetPosition()
 void Player::SetPosition(Vector3 position)
 {
 	_position = position;
-}
-
-
-void Player::Keyboard(unsigned char key, int x, int y)
-{
-	//switch (key)
-	//{
-	//case('d'):
-	//	_position.x += 0.1f;
-	//	break;
-	//case('a'):
-	//	_position.x -= 0.1f;
-	//	break;
-
-	//case('w'):
-	//	_position.z += 0.1f;
-	//	break;
-	//case('s'):
-	//	_position.z -= 0.1f;
-	//	break;
-
-
-	//default:
-	//	break;
-	//}
-
-
-	//if (key == 'a')
-	//{
-	//	_position.x += 0.1f;
-	//}
-
-	//if (key == 'd')
-	//{
-	//	_position.x -= 0.1f;
-	//}
-
-	//if (key == 'w')
-	//{
-	//	_position.y += 0.1f;
-	//}
-
-	//if (key == 's')
-	//{
-	//	_position.y -= 0.1f;
-	//}
-
 }

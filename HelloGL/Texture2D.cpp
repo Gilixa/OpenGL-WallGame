@@ -35,7 +35,6 @@ bool Texture2D::Load(char* path, int width, int height)
 	inFile.read(tempTextureData, fileSize);//Read all data at once
 	inFile.close();
 
-
 	cout << path << " loaded" << endl;
 
 	glGenTextures(1, &_ID); // Get the next texture ID

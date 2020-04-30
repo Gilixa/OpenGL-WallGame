@@ -1,13 +1,14 @@
 #pragma once
 #include "SceneObject.h"
-class Rectangle : public SceneObject
+
+class Rect : public SceneObject
 {
 private:
 	Material* _material;
 
 public:
-	Rectangle(Mesh* mesh, Texture2D* texture, float x, float y, float z);
-	~Rectangle();
+	Rect(Mesh* mesh, Texture2D* texture, float x, float y, float z);
+	~Rect();
 
 	void Draw();
 	void Update();
@@ -15,5 +16,6 @@ public:
 	void SetUpMaterial();
 
 	void SetRotation(float rotation);
+	float _width;
 };
 

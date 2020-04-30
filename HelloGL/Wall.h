@@ -5,21 +5,23 @@
 #include "GL/freeglut.h" //freeglut library
 #include "Cube.h"
 #include "SceneObject.h"
+#include "Rectangle.h"
 
+class Player;
+#define PI 3.14159265
 
 class Wall
 {
 public:
 	Wall(float z);
 	~Wall();
-
 	void Draw();
 	void GenerateWall();
 	void Update();
 
 	float _Zposition;
 
-	bool WallCollision(SceneObject* s1);
+	bool WallCollision(Player* s1);
 
 private:
 	returnInts GetPos(int num1);
@@ -28,7 +30,8 @@ private:
 
 	int numberOfTiles;
 
-	float CalculateDistanceSquared(SceneObject* s1, SceneObject* s2);
+	float CalculateDistanceSquared(Player* s1, SceneObject* s2);
+
 
 };
 

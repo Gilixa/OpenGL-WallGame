@@ -1,33 +1,30 @@
 #include "Rectangle.h"
-
-#include "Cube.h"
 #include <iostream>
 
 using namespace std;
 
 
-Rectangle::Rectangle(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh)
+Rect::Rect(Mesh* mesh, Texture2D* texture, float x, float y, float z) : SceneObject(mesh)
 {
 	_position.x = x;
 	_position.y = y;
 	_position.z = z;
-	_rotation = -90.0f;
 	_texture = texture;
 
 	_width = (_mesh->Vertices[0].x - _mesh->Vertices[1].x) + (_mesh->Vertices[0].y - _mesh->Vertices[1].y) + (_mesh->Vertices[0].z - _mesh->Vertices[1].z);
 
 }
 
-Rectangle::~Rectangle()
+Rect::~Rect()
 {
 
 }
 
-void Rectangle::Draw()
+void Rect::Draw()
 {
 
 	glPushMatrix();
-	glTranslatef(_position.x, _position.y, _position.z);
+	glTranslatef(_position.x, _position.y, 0);
 	glRotatef(_rotation, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_NORMAL_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, _texture->GetID());
@@ -35,7 +32,7 @@ void Rectangle::Draw()
 	glEnableClientState(GL_VERTEX_ARRAY);
 	//glEnableClientState(GL_COLOR_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, _mesh->Vertices);
-	//glColorPointer(3, GL_FLOAT, 0, _mesh->Colors);Rectangle
+	//glColorPointer(3, GL_FLOAT, 0, _mesh->Colors);
 	glTexCoordPointer(2, GL_FLOAT, 0, _mesh->TexCoords);
 	glNormalPointer(GL_FLOAT, 0, _mesh->Normals);
 	SetUpMaterial();
@@ -46,7 +43,7 @@ void Rectangle::Draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-void Rectangle::Update()
+void Rect::Update()
 {
 	//_rotation += 0.001f;
 	//if (_rotation >= 360.0f)
@@ -56,12 +53,12 @@ void Rectangle::Update()
 
 }
 
-void Rectangle::SetRotation(float rotation)
+void Rect::SetRotation(float rotation)
 {
-
+	_rotation = rotation;
 }
 
-void Rectangle::SetUpMaterial()
+void Rect::SetUpMaterial()
 {
 	_material = new Material();
 	_material->Ambient.x = 0.8; _material->Ambient.y = 0.05; _material->Ambient.z = 0.05; _material->Ambient.w = 1.0;
